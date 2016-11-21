@@ -464,8 +464,8 @@ export function addTask(sampleID, parameters, queue, runNow) {
                    parameters,
                    checked: true };
 
+    const taskIndex = queue[sampleID].tasks.length;
     dispatch(addTaskAction(task));
-    const taskIndex = queue[sampleID].tasks.length - 1;
 
     sendAddQueueItem([task]).then((response) => {
       if (response.status >= 400) {
