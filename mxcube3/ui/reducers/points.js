@@ -22,6 +22,10 @@ export default (state = initialState, action) => {
       {
         return initialState;
       }
+    case 'SET_CURRENT_SAMPLE':
+      {
+        return initialState;
+      }
     case 'SET_INITIAL_STATUS':
       {
         return {
