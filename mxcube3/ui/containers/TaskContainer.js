@@ -16,7 +16,8 @@ import {
   clearQueue,
   appendSampleList,
   setQueueAndRun,
-  setCurrentSample
+  setCurrentSample,
+  sendMountSample
 } from '../actions/queue';
 
 import {
@@ -36,6 +37,7 @@ class TaskContainer extends React.Component {
     this.props.addSample(sampleData);
     this.props.selectSamples([sampleData.sampleID], true);
     this.props.setCurrentSample(sampleData.sampleID);
+    this.props.sendMountSample(sampleData.sampleID);
   }
 
   render() {
@@ -127,7 +129,8 @@ function mapDispatchToProps(dispatch) {
     addSample: bindActionCreators(addSample, dispatch),
     setCurrentSample: bindActionCreators(setCurrentSample, dispatch),
     selectSamples: bindActionCreators(selectAction, dispatch),
-    clearQueue: bindActionCreators(clearQueue, dispatch)
+    clearQueue: bindActionCreators(clearQueue, dispatch),
+    sendMountSample: bindActionCreators(sendMountSample, dispatch)
   };
 }
 
