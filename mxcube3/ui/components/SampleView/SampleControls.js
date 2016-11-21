@@ -64,9 +64,9 @@ export default class SampleControls extends React.Component {
   toggleLight(name) {
     const lighStatus = this.props.motors[`${name}Switch`].Status;
     if (lighStatus) {
-      this.props.sampleActions.sendLightOff(name.toLowerCase());
+      this.props.sampleActions.sendLightOff(name);
     } else {
-      this.props.sampleActions.sendLightOn(name.toLowerCase());
+      this.props.sampleActions.sendLightOn(name);
     }
   }
 

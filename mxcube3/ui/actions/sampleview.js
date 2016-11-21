@@ -295,8 +295,8 @@ export function sendZoomPos(level) {
 
 export function sendLightOn(name) {
   return function (dispatch) {
-    dispatch(saveMotorPosition(name, true));
-    fetch(`/mxcube/api/v0.1/sampleview/${name}on`, {
+    dispatch(saveMotorPosition(`${name}Switch`, true));
+    fetch(`/mxcube/api/v0.1/sampleview/${name.toLowerCase()}on`, {
       method: 'PUT',
       credentials: 'include',
       headers: {
@@ -305,7 +305,7 @@ export function sendLightOn(name) {
       }
     }).then((response) => {
       if (response.status >= 400) {
-        dispatch(saveMotorPosition(name, false));
+        dispatch(saveMotorPosition(`${name}Switch`, false));
         dispatch(showErrorPanel(true, 'Server refused to turn light on'));
       }
     });
@@ -314,8 +314,8 @@ export function sendLightOn(name) {
 
 export function sendLightOff(name) {
   return function (dispatch) {
-    dispatch(saveMotorPosition(name, false));
-    fetch(`/mxcube/api/v0.1/sampleview/${name}off`, {
+    dispatch(saveMotorPosition(`${name}Switch`, false));
+    fetch(`/mxcube/api/v0.1/sampleview/${name.toLowerCase()}off`, {
       method: 'PUT',
       credentials: 'include',
       headers: {
@@ -324,7 +324,7 @@ export function sendLightOff(name) {
       }
     }).then((response) => {
       if (response.status >= 400) {
-        dispatch(saveMotorPosition(name, true));
+        dispatch(saveMotorPosition(`${name}Switch`, true));
         dispatch(showErrorPanel(true, 'Server refused to turn light off'));
       }
     });
