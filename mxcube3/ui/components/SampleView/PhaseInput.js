@@ -8,6 +8,13 @@ export default class PhaseInput extends React.Component {
     this.sendPhase = this.sendPhase.bind(this);
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.value !== this.props.value) {
+      this.refs.phaseValue.value = nextProps.props.phase;
+      this.refs.phaseValue.defaultValue = nextProps.props.phase;
+    }
+  }
+
   sendPhase(event) {
     this.props.sendPhase(event.target.value);
   }
@@ -15,6 +22,7 @@ export default class PhaseInput extends React.Component {
   render() {
     return (
       <select
+        ref="phaseValue"
         defaultValue={this.props.phase}
         className="form-control input-sm"
         onChange={this.sendPhase}
