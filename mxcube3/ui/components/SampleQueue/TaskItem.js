@@ -151,7 +151,7 @@ export default class TaskItem extends Component {
                       onMouseEnter={() => this.setState({ overInput: true }) }
                       onMouseLeave={() => this.setState({ overInput: false }) }
                       className="form-control"
-                      value={`${rootPath}${data.parameters.path}`}
+                      value={`${rootPath}/${data.parameters.path}`}
                     />
                   </div>
                 <div className="col-sm-3">
