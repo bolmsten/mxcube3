@@ -26,9 +26,10 @@ export default (state = initialState, action) => {
     case 'ADD_TASK':
       {
         return { ...state, defaultParameters:
-                 { ...state.defaultParameters, [action.task.type.toLowerCase()]: {
-                   ...action.task.parameters, run_number:
-                   state.defaultParameters[action.task.type.toLowerCase()].run_number + 1
+                 { ...state.defaultParameters,
+                  [action.task.label.replace(/\s+/g, '').toLowerCase()]: {
+                    ...action.task.parameters,
+                    run_number: state.defaultParameters[action.task.label.replace(/\s+/g, '').toLowerCase()].run_number + 1
                  }
                }
              };
@@ -66,10 +67,14 @@ export default (state = initialState, action) => {
         return {
           ...state,
           defaultParameters: {
-            datacollection: { ...action.data.dcParameters,
-                              ...state.defaultParameters.datacollection, run_number: 1 },
-            characterisation: { ...action.data.dcParameters,
-              ...state.defaultParameters.characterisation, run_number: 1 },
+            datacollection: {
+              ...action.data.dcParameters,
+              ...state.defaultParameters.datacollection,
+              run_number: 1 },
+            characterisation: { 
+              ...action.data.dcParameters,
+              ...state.defaultParameters.characterisation,
+              run_number: 1 },
             helical: {
               ...action.data.dcParameters,
               ...state.defaultParameters.helical,
