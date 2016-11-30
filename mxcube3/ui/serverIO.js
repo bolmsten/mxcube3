@@ -70,6 +70,7 @@ class ServerIO {
     });
 
     this.hwrSocket.on('motor_position', (record) => {
+      this.dispatch(updatePointsPosition(record.centredPositions));
       this.dispatch(saveMotorPosition(record.name, record.position));
     });
 
