@@ -395,7 +395,9 @@ DataCollection = reduxForm({ // <----- THIS IS THE IMPORTANT PART!
 state => ({ // mapStateToProps
   initialValues: {
     ...state.taskForm.taskData.parameters,
-    beam_size: state.sampleview.currentAperture
+    beam_size: state.sampleview.currentAperture,
+    energy: state.beamline.energy.value,
+    resolution: state.beamline.resolution.value
   } // will pull state into form's initialValues
 }))(DataCollection);
 

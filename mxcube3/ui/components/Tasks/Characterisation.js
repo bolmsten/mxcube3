@@ -421,7 +421,9 @@ state => ({ // mapStateToProps
   initialValues: {
     ...state.taskForm.taskData.parameters,
     beam_size: state.sampleview.currentAperture,
-    path: state.login.loginInfo.loginRes.Proposal.code
+    path: state.login.loginInfo.loginRes.Proposal.code,
+    energy: state.beamline.energy.value,
+    resolution: state.beamline.resolution.value
   } // will pull state into form's initialValues
 }))(Characterisation);
 
