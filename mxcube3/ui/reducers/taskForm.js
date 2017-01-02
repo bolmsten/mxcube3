@@ -52,9 +52,9 @@ export default (state = initialState, action) => {
         return {
           ...state,
           defaultParameters: {
-            datacollection: { ...state.defaultParameters.datacollection, prefix: null, run_number: 1 },
-            characterisation: { ...state.defaultParameters.characterisation, prefix: null, run_number: 1 },
-            helical: { ...state.defaultParameters.helical, prefix: null, run_number: 1 }
+            datacollection: { ...state.defaultParameters.datacollection, prefix: null, path: null, run_number: 1 },
+            characterisation: { ...state.defaultParameters.characterisation, prefix: null, path: null, run_number: 1 },
+            helical: { ...state.defaultParameters.helical, prefix: null, path: null, run_number: 1 }
           }
         };
       }
@@ -63,9 +63,9 @@ export default (state = initialState, action) => {
         return {
           ...state,
           defaultParameters: {
-            datacollection: { ...state.defaultParameters.datacollection, prefix: null, run_number: 1 },
-            characterisation: { ...state.defaultParameters.characterisation, prefix: null, run_number: 1 },
-            helical: { ...state.defaultParameters.helical, prefix: null, run_number: 1 }
+            datacollection: { ...state.defaultParameters.datacollection, prefix: null, path: null, run_number: 1 },
+            characterisation: { ...state.defaultParameters.characterisation, prefix: null, path: null, run_number: 1 },
+            helical: { ...state.defaultParameters.helical, prefix: null, path: null, run_number: 1 }
           }
         };
       }
