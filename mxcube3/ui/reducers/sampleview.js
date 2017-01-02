@@ -57,6 +57,10 @@ export default (state = initialState, action) => {
             }
         );
       }
+    case 'SET_CURRENT_SAMPLE':
+      {
+        return { ...state, lines: [], distancePoints: [], clickCentringPoints: [] };
+      }
     case 'ADD_LINE':
       {
         return { ...state, lines: [...state.lines, { p1: action.p1, p2: action.p2 }] };
@@ -136,8 +140,7 @@ export default (state = initialState, action) => {
           beamShape: action.data.beamInfo.shape,
           beamSize: { x: action.data.beamInfo.size_x, y: action.data.beamInfo.size_y },
           phaseList: action.data.phaseList,
-          currentPhase: action.data.currentPhase,
-          lines: []
+          currentPhase: action.data.currentPhase
         };
       }
     default:
