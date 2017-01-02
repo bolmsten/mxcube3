@@ -20,7 +20,7 @@ import 'font-awesome-webpack';
 import { getLoginInfo } from './actions/login';
 require('file?name=[name].[ext]!index.html');
 
-const store = createStore(rootReducer, applyMiddleware(thunk, createLogger()), autoRehydrate());
+const store = createStore(rootReducer, applyMiddleware(thunk, createLogger()));
 
 if (module.hot) {
   // Enable Webpack hot module replacement for reducers
@@ -64,23 +64,24 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { initialized: false };
+    this.state = { initialized: true };
   }
 
   componentWillMount() {
-    const persistor = persistStore(store,
-           { blacklist: ['remoteAccess', 'beamline', 'sampleChanger',
-                         'form', 'login', 'general', 'logger', 'points'],
-             storage: new ServerStorage() },
-             () => {
-               serverIO.listen(store);
-               this.setState({ initialized: true });
-             }
-    );
+    serverIO.listen(store);
+    // const persistor = persistStore(store,
+    //        { blacklist: ['remoteAccess', 'beamline', 'sampleChanger',
+    //                      'form', 'login', 'general', 'logger', 'points'],
+    //          storage: new ServerStorage() },
+    //          () => {
+    //            serverIO.listen(store);
+    //            this.setState({ initialized: true });
+    //          }
+    // );
 
-    serverIO.connectStateSocket(persistor);
+    // serverIO.connectStateSocket(persistor);
 
-    crosstabSync(persistor);
+    // crosstabSync(persistor);
   }
 
   render() {
