@@ -31,6 +31,7 @@ export function getLoginInfo() {
           .then(loginInfo => {
             dispatch(setMaster(loginInfo.master));
             dispatch(setLoginInfo(loginInfo));
+            dispatch(sendClearQueue());
             if (loginInfo.loginRes.Proposal) {
               dispatch(afterLogin(loginInfo.loginRes));
               dispatch(getInitialStatus());
