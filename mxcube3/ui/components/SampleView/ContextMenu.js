@@ -20,6 +20,7 @@ export default class ContextMenu extends React.Component {
         { text: 'Add Helical Scan', action: () => this.createLine(), key: 1 }
         ],
         LINE: [
+        { text: 'Add Helical Scan', action: () => this.showModal('Helical'), key: 1 },
         { text: 'Delete Line', action: () => this.removeLine(), key: 2 }
         ],
         NONE: [
@@ -42,19 +43,21 @@ export default class ContextMenu extends React.Component {
     const { sampleId, defaultParameters, shape, samplesInformation } = this.props;
     const node = samplesInformation[sampleId];
     const parameters = defaultParameters[modalName.toLowerCase()];
-    const prefix = parameters.prefix ? parameters.prefix : node.defaultPrefix;
+    const prefix = parameters.prefix ? parameters.prefix : `${modalName.toLowerCase().charAt(0)}-${node.defaultPrefix}`
+    const path = parameters.path ? parameters.path : node.sampleName;
 
+    const id = shape.type === "LINE" ? shape.pointsID : shape.id;
     this.props.showForm(
       modalName,
       [sampleId],
       { parameters:
         {
-          path: node.sampleName,
           ...parameters,
-          prefix: prefix 
+          path: path,
+          prefix: prefix
         }
       },
-      shape.id
+      id
     );
     this.hideContextMenu();
     this.props.sampleActions.showContextMenu(false);

@@ -60,7 +60,7 @@ export function makeCircle(x, y, selectable, radius, color, id, type, text) {
   });
 }
 
-export function makeLine(x1, y1, x2, y2, col, wid, select, id, hover = 'crosshair', text, type) {
+export function makeLine(x1, y1, x2, y2, col, wid, select, id, hover = 'crosshair', text, type, pointsID) {
   return new fabric.Line([x1, y1, x2, y2], {
     fill: col,
     stroke: col,
@@ -78,7 +78,8 @@ export function makeLine(x1, y1, x2, y2, col, wid, select, id, hover = 'crosshai
     selectable: select,
     hoverCursor: hover,
     id,
-    text
+    text,
+    pointsID
   });
 }
 
@@ -171,9 +172,9 @@ export function makePoints(points, imageRatio) {
   return fabricPoints;
 }
 
-export function pointLine(x1, y1, x2, y2, color, width, selectable, id, cursor) {
+export function pointLine(x1, y1, x2, y2, color, width, selectable, id, cursor,pointsID) {
   const text = makeText((x1 + x2) / 2, (y1 + y2) / 2, 14, color, `L${id}`);
-  const line = makeLine(x1, y1, x2, y2, color, width, selectable, id, cursor, text, 'LINE');
+  const line = makeLine(x1, y1, x2, y2, color, width, selectable, id, cursor, text, 'LINE', pointsID);
   return [
     text,
     line
@@ -186,17 +187,20 @@ export function makeLines(lines, points, imageRatio) {
   lines.forEach((line, index) => {
     const p1 = points[line.p1];
     const p2 = points[line.p2];
-    fabricLines.push(...pointLine(
-      p1.x / imageRatio,
-      p1.y / imageRatio,
-      p2.x / imageRatio,
-      p2.y / imageRatio,
-      'yellow',
-      3,
-      true,
-      index,
-      'pointer'
-    ));
+    if (p1 && p2) {
+      fabricLines.push(...pointLine(
+        p1.x / imageRatio,
+        p1.y / imageRatio,
+        p2.x / imageRatio,
+        p2.y / imageRatio,
+        'yellow',
+        3,
+        true,
+        index,
+        'pointer',
+        {p1: p1.posId, p2: p2.posId},
+      ));
+    }
   });
   return fabricLines;
 }
