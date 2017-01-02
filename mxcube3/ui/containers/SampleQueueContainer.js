@@ -84,15 +84,17 @@ export default class SampleQueueContainer extends React.Component {
     } = this.props.queueActions;
 
     return (
-      <div style={ { display: 'flex', flexDirection: 'column', width: '100%' } }>
-                <QueueControl
+      <div style={ { display: 'flex', flexDirection: 'column', width: '100%'} }>
+                {manualMount.set ? null : 
+                <QueueControl style={ { marginBottom: '10px' } }
+                  show={manualMount}
                   historyLength={history.nodes.length}
                   todoLength={todo.nodes.length}
                   currentNode={current.node}
                   queueStatus={queueStatus}
                   runQueue={sendRunQueue}
                   stopQueue={sendStopQueue}
-                />
+                />}
               <div className="m-tree queue-body">
                 <Nav
                   bsStyle="tabs"
